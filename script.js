@@ -2,47 +2,47 @@
 
 const titleElement = document.querySelector(".title");
 const buttonsContainer = document.querySelector(".buttons");
-const ДааButton = document.querySelector(".btn--Даа");
-const НеаButton = document.querySelector(".btn--Неа");
+const yesButton = document.querySelector(".btn--yes");
+const noButton = document.querySelector(".btn--no");
 const catImg = document.querySelector(".cat-img");
 
 const MAX_IMAGES = 5;
 
 let play = true;
-let НеаCount = 0;
+let noCount = 0;
 
-ДааButton.addEventListener("click", handleДааClick);
+yesButton.addEventListener("click", handleYesClick);
 
-НеаButton.addEventListener("click", function () {
+noButton.addEventListener("click", function () {
   if (play) {
-    НеаCount++;
-    const imageIndex = Math.min(НеаCount, MAX_IMAGES);
+    noCount++;
+    const imageIndex = Math.min(noCount, MAX_IMAGES);
     changeImage(imageIndex);
-    resizeДааButton();
-    updateНеаButtonText();
-    if (НеаCount === MAX_IMAGES) {
+    resizeYesButton();
+    updateNoButtonText();
+    if (noCount === MAX_IMAGES) {
       play = false;
     }
   }
 });
 
-function handleДааClick() {
-  titleElement.innerHTML = "ДАА!! Жаныым жаным";
+function handleYesClick() {
+  titleElement.innerHTML = "Yayyy!! :3";
   buttonsContainer.classList.add("hidden");
-  changeImage("Даа");
+  changeImage("yes");
 }
 
-function resizeДааButton() {
-  const computedStyle = window.getComputedStyle(ДааButton);
+function resizeYesButton() {
+  const computedStyle = window.getComputedStyle(yesButton);
   const fontSize = parseFloat(computedStyle.getPropertyValue("font-size"));
   const newFontSize = fontSize * 1.6;
 
-  ДааButton.style.fontSize = `${newFontSize}px`;
+  yesButton.style.fontSize = `${newFontSize}px`;
 }
 
-function generateMessage(НеаCount) {
+function generateMessage(noCount) {
   const messages = [
-    "Неа",
+    "No",
     "Жаным, ты уверена?",
     "Точно точноо?",
     "Тууй жан :(",
@@ -58,6 +58,6 @@ function changeImage(image) {
   catImg.src = `img/cat-${image}.jpg`;
 }
 
-function updateНеаButtonText() {
-  НеаButton.innerHTML = generateMessage(НеаCount);
+function updateNoButtonText() {
+  noButton.innerHTML = generateMessage(noCount);
 }
